@@ -39,7 +39,8 @@ Keypad::Keypad(char *userKeymap, byte *row, byte *col, byte numRows, byte numCol
 	sizeKpd.columns = numCols;
 
 	begin(userKeymap);
-
+    for (unsigned int & i : bitMap)
+        i = 0;
 	setDebounceTime(10);
 	setHoldTime(500);
 	keypadEventListener = 0;
@@ -82,11 +83,14 @@ bool Keypad::getKeys() {
 // Private : Hardware scan
 void Keypad::scanKeys() {
 	// Re-intialize the row pins. Allows sharing these pins with other hardware.
+    /*
 	for (byte r=0; r<sizeKpd.rows; r++) {
 		pin_mode(rowPins[r],INPUT_PULLUP);
 	}
+     */
 
 	// bitMap stores ALL the keys that are being pressed.
+    /*
 	for (byte c=0; c<sizeKpd.columns; c++) {
 		pin_mode(columnPins[c],OUTPUT);
 		pin_write(columnPins[c], LOW);	// Begin column pulse output.
@@ -96,7 +100,7 @@ void Keypad::scanKeys() {
 		// Set pin to high impedance input. Effectively ends column pulse.
 		pin_write(columnPins[c],HIGH);
 		pin_mode(columnPins[c],INPUT);
-	}
+	}*/
 }
 
 // Manage the list without rearranging the keys. Returns true if any keys on the list changed state.

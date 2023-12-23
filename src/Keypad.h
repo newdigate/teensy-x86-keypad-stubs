@@ -99,6 +99,15 @@ public:
 	bool keyStateChanged();
 	byte numKeys();
 
+    /* x86 emulation api below */
+    void pressKey(uint8_t col, uint8_t row) {
+        bitMap[row] = bitSet(bitMap[row], col);
+    }
+
+    void unpressKey(uint8_t col, uint8_t row) {
+        bitMap[row] = bitClear(bitMap[row], col);
+    }
+
 private:
 	unsigned long startTime;
 	char *keymap;
